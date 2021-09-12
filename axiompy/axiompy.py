@@ -91,12 +91,15 @@ class AxiomPy:
     planck_mass = Unit("planck mass", "ℓP", 2.18 * 10**-8 * kilogram.value, "mass")
     solar_mass = Unit("solar mass", "M☉", 1.99 * 10**30 * kilogram.value, "mass")
 
+    @staticmethod
     def base_unit_from_string(unit_cat: str):
         return AxiomPy.units[unit_cat]["base"]
 
+    @staticmethod
     def base_unit_from_value(value):
         return AxiomPy.units[value.unit.category]["base"]
 
+    @staticmethod
     def value_to_base(value):
         """
         Converts a value's unit to its base unit
@@ -110,6 +113,7 @@ class AxiomPy:
 
         return Value(value.unit.value * value.value, base_unit)
 
+    @staticmethod
     def unit_convert(from_value, to_unit):
         """
         Params:

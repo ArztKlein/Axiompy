@@ -13,10 +13,10 @@ class Value:
     def __int__(self):
         return int(self.value)
 
-    def incompatible_type(other):
+    def incompatible_type(self, other):
         raise Exception(f"Incompatible types Value, {type(other)}")
     
-    def incompatible_categories(other):
+    def incompatible_categories(self, other):
         raise Exception(f"Incompatible unit categories {self.unit.category}, {other.unit.category}")
 
 

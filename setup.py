@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='Axiompy',
-      version='0.0.1',
+      version='0.0.2',
       description='Unit Conversions and other math',
       author='ArztKlein',
       url='https://www.python.org/sigs/distutils-sig/',
