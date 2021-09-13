@@ -2,3 +2,5 @@
 */__pycache__
 manifest
 dist
+build
+axiompy.egg-info
