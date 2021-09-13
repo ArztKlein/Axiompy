@@ -1,3 +1,4 @@
+LICENSE
 README.md
 setup.py
 axiompy/__init__.py
