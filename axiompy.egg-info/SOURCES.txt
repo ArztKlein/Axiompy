@@ -1,0 +1,10 @@
+README.md
+setup.py
+axiompy/__init__.py
+axiompy/axiompy.py
+axiompy/unit.py
+axiompy/value.py
+axiompy.egg-info/PKG-INFO
+axiompy.egg-info/SOURCES.txt
+axiompy.egg-info/dependency_links.txt
+axiompy.egg-info/top_level.txt
