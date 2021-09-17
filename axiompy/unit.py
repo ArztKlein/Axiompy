@@ -1,22 +1,19 @@
 import axiompy
 
 class Unit:
-    def __init__(self, name, name_short, value, category):
+    def __init__(self, name, value, category, db):
         self.name = name
-        self.name_short = name_short
         self.value = value
         self.category = category
-
-    def __repr__(self):
-        return "Unit(self.name, self.name_short, self.value,self.category)"
+        self.db = db
 
     def __str__(self):
-        return self.name
+        return f"<Unit ({self.name})>"
 
     def __mul__(self, other):
         if(isinstance(other, (int, float, complex))):
-            return axiompy.value.Value(other, self)
+            return axiompy.Value(other, self, self.db)
         elif(isinstance(other, axiompy.value.Value)):
-            return axiompy.value.Value(self.value * other.value, self)
+            return axiompy.Value(self.value * other.value, self, self.db)
 
     __rmul__ = __mul__
