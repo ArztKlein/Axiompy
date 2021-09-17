@@ -1,4 +1,3 @@
-from axiompy.fileutils import FileUtils as fu
 import axiompy.units as _units
 
 units = _units.Units()

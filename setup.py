@@ -2,7 +2,7 @@ from setuptools import find_packages
 from distutils.core import setup
 
 setup(name='axiompy',
-      version='0.1.0',
+      version='0.1.1',
       description='Unit Conversions and other math',
       author='ArztKlein',
       author_email='',
