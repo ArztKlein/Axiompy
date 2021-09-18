@@ -58,6 +58,5 @@ drachm = grain * 60
 tonne = 1000 * kilogram
 dalton = 10 ^ -27 * 1.66 * kilogram
 slug = 14.6 * kilogram
-pound = 0.45 * kilogram
 planck_mass = 10 ^ -8 * 2.18
 solar_mass = 10 ^ 30 * 1.99 * kilogram
