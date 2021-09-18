@@ -1,17 +1,18 @@
 import axiompy
+import pkg_resources
 
 class Units:
     def __init__(self):
 
-        import importlib.resources as pkg_resources
+        rsman = pkg_resources.ResourceManager()
 
-        from . import db  # relative-import the *package* containing the templates
-
-        unit_file = pkg_resources.read_text(db, 'en_units.acf')
+        unit_file = rsman.resource_string('axiompy', 'db/en_units.acf').decode('utf-8')
         lines = unit_file.splitlines()
+
         lines = list(filter(None, lines)) #Remove empty lines
 
-        self.units_dict = axiompy.fileutils.acf.ACF(lines).data
+        self.units_dict = axiompy.ACF(lines).data
+
         self.units = self.acf_dict_to_units(self.units_dict)
 
     def acf_dict_to_units(self, d):

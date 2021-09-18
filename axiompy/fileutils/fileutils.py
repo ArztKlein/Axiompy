@@ -3,7 +3,7 @@ import axiompy
 class FileUtils:
     @staticmethod
     def load_acf(path):
-        return axiompy.fileutils.acf.ACF(FileUtils.read_lines(path))
+        return axiompy.ACF(FileUtils.read_lines(path))
         
     
     @staticmethod

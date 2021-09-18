@@ -11,8 +11,7 @@ pip install axiompy
 ## Usage
 Convert between units by using the unit_convert method.
 ```python
-from axiompy import axiompy.units as _units
-units = _units.Units()
-
-print(units.unit_convert(3 * units.metre), units.foot)
+from axiompy import Units
+units = Units()
+print(units.unit_convert(3 * units.metre, units.foot))
 ```
