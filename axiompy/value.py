@@ -1,5 +1,5 @@
 import axiompy
-import math
+from operator import *
 
 class Value:
     
@@ -21,138 +21,49 @@ class Value:
     def incompatible_categories(self, other):
         raise Exception(f"Incompatible unit categories {self.unit.category}, {other.unit.category}")
 
+    def __get_base_value(self, value):
+        if isinstance(value, Value):
+            return self.db.value_to_base(value).value # Convert it to the base unit
+
+        elif isinstance(value, axiompy.unit.Unit):
+            if self.unit.category != value.category:
+                Value.incompatible_categories(value)
+            return value.value
+
+        elif isinstance(value, (int, float, complex)):
+            return self.__get_base_value(Value(value, self.unit, self.db)) # Convert it to a Value so that the unit is correct, and then get base value. There is probably a nicer way to do this though.
+        else:
+            raise Exception(f"Unsupported value: {value}. Must be either a Value, Unit, float, int, or complex.")
+
     def __mul__(self, other):
-        if(isinstance(other, Value)):
-
-            if(self.unit.category != other.unit.category):
-                Value.incompatible_categories(other)
-            
-            value1 = self.db.value_to_base(self)
-            value2 = self.db.value_to_base(other)
-            dimension = self.dimension + other.dimension
-            base_value = Value(value1.value * value2.value, self.db.base_unit_from_value(self), dimension)
-            answer = self.db.unit_convert(base_value, self.unit)
-
-            return answer
-
-        elif(isinstance(other, axiompy.unit.Unit)):
-            if(self.unit.category != other.category):
-                Value.incompatible_categories(other)
-
-            answer = self.db.value_to_base(self) * other.value
-            answer.dimension = self.dimension + 1
-
-            return answer
-
-        elif(isinstance(other, (int, float, complex))):
-            return Value(self.value * other, self.unit, self.db)
-
-        Value.incompatible_type(other)
+        return self.__math_operator(mul, other)
 
     def __truediv__(self, other):
-        if(isinstance(other, Value)):
-
-            if(self.unit.category != other.unit.category):
-                Value.incompatible_categories(other)
-            
-            value1 = self.db.value_to_base(self)
-            value2 = float(self.db.value_to_base(other))
-            base_value = Value(value1.value / value2.value, self.db.base_unit_from_value(self), self.dimension)
-            answer = self.db.unit_convert(base_value, self.unit)
-
-            return answer
-
-        elif(isinstance(other, axiompy.unit.Unit)):
-            if(self.unit.category != other.category):
-                Value.incompatible_categories(other)
-
-            answer = self.db.value_to_base(self) / float(other.value)
-
-            return answer
-
-        elif(isinstance(other, (int, float, complex))):
-            return Value(self.value / other, self.unit, self.db)
-
-        Value.incompatible_type(other)
+        return self.__math_operator(truediv, other)
 
     def __floordiv__(self, other):
-        if(isinstance(other, Value)):
-
-            if(self.unit.category != other.unit.category):
-                Value.incompatible_categories(other)
-            
-            value1 = self.db.value_to_base(self)
-            value2 = float(self.db.value_to_base(other))
-            base_value = Value(math.floor(value1.value / value2.value), self.db.base_unit_from_value(self), self.dimension)
-            answer = self.db.unit_convert(base_value, self.unit)
-
-            return answer
-
-        elif(isinstance(other, axiompy.unit.Unit)):
-            if(self.unit.category != other.category):
-                Value.incompatible_categories(other)
-
-            answer = math.floor(self.db.value_to_base(self) / float(other.value))
-
-            return answer
-
-        elif(isinstance(other, (int, float, complex))):
-            return Value(math.floor(self.value / other), self.unit, self.db)
-
-        Value.incompatible_type(other)
-
+        return self.__math_operator(floordiv, other)
 
     def __add__(self, other):
-        if(isinstance(other, Value)):
-
-            if(self.unit.category != other.unit.category):
-                Value.incompatible_categories(other)
-            
-            value1 = self.db.value_to_base(self)
-            value2 = self.db.value_to_base(other)
-            base_value = Value(value1.value + value2.value, self.db.base_unit_from_value(self), self.dimension)
-            answer = self.db.unit_convert(base_value, self.unit)
-
-            return answer
-
-        elif(isinstance(other, axiompy.unit.Unit)):
-            if(self.unit.category != other.category):
-                Value.incompatible_categories(other)
-
-            answer = self.db.value_to_base(self) + other.value
-
-            return answer
-
-        elif(isinstance(other, (int, float, complex))):
-            return Value(self.value + other, self.unit, self.db)
-
-        Value.incompatible_type(other)
+        return self.__math_operator(add, other)
     
     def __sub__(self, other):
-        if(isinstance(other, Value)):
+        return self.__math_operator(sub, other)
 
-            if(self.unit.category != other.unit.category):
-                Value.incompatible_categories(other)
+    def __math_operator(self, operator, other_value):
+        value1 = self.__get_base_value(self)
+        value2 = self.__get_base_value(other_value)
+
+        result_value = operator(value1, value2)
+
+        if(operator == mul):
+            answer = Value(result_value, self.db.base_unit_from_value(self), self.db, dimension=(self.dimension + 1))
+        else:
+            answer = Value(result_value, self.db.base_unit_from_value(self), self.db)
             
-            value1 = self.db.value_to_base(self)
-            value2 = self.db.value_to_base(other)
-            base_value = Value(value1.value - value2.value, self.db.base_unit_from_value(self), self.dimension)
-            answer = self.db.unit_convert(base_value, self.unit)
+        answer = self.db.unit_convert(answer, self.unit)
 
-            return answer
-
-        elif(isinstance(other, axiompy.unit.Unit)):
-            if(self.unit.category != other.category):
-                Value.incompatible_categories(other)
-
-            answer = self.db.value_to_base(self) - other.value
-
-            return answer
-
-        elif(isinstance(other, (int, float, complex))):
-            return Value(self.value - other, self.unit, self.db)
-
-        Value.incompatible_type(other)
+        return answer
 
     __rmul__ = __mul__
     __rtruediv__ = __truediv__

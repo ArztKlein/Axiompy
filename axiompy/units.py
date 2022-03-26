@@ -33,21 +33,21 @@ class Units:
 
         return units
 
-    def unit_convert(self, from_value, to_unit):
+    def unit_convert(self, from_value, to_unit: "Unit"):
         """
         Params:
             from: axiompy.Value
-            tounit: axiompy.Unit
+            to_unit: axiompy.Unit
 
         Converts an axiompy value to a desired unit.
         """
 
         from_unit = from_value.unit
+        to_unit_value = to_unit.value
         
+        # Make sure that units from different categories aren't being converted (eg hours to metres)
         if(from_unit.category != to_unit.category):
             raise Exception(f"Incompatible unit categories {from_unit.category}, {to_unit.category}")
-
-        to_unit_value = to_unit.value
 
         return axiompy.Value((from_value.value * from_unit.value) / to_unit_value, to_unit, self, dimension=from_value.dimension)
 
