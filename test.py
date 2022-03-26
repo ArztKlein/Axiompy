@@ -9,3 +9,5 @@ print((units.centimetre * 3) * (units.metre * 1))
 value = units.kilometre * 2.5
 
 print((units.centimetre * 3) - 19)
+
+print(units.unit_convert(3 * units.metre, units.foot))
