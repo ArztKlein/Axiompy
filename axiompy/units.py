@@ -71,6 +71,16 @@ class Units:
         return axiompy.Value(value.unit.value * value.value, base_unit, self)        
 
     def __getattr__(self, name):
-        value = self.units[name]
+        return self.unit(name)
 
+    def unit(self, name: str):
+        """
+        Get a unit from a string name.
+        """
+
+        try:
+            value = self.units[name]
+        except ValueError:
+            raise Exception(f"Could not find Unit with name {name}. This unit does not exist. Check for typos.")
+        
         return value
