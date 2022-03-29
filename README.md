@@ -1,4 +1,6 @@
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/axiompy)
+![PyPI](https://img.shields.io/pypi/v/axiompy)
+
 # Axiompy
 Python library to convert, and perform math operations on values of particular units.
 Includes SI Base units, and non-standard units such as the ones adopted in the imperial system.
