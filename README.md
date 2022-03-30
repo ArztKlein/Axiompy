@@ -28,3 +28,14 @@ from axiompy import Units
 units = Units()
 print(units.unit_convert(3 * units.unit("metre"), units.foot))
 ```
+
+## Convert value to its base value
+```py
+from axiompy import Units
+units = Units()
+
+value = Value(15, units.centimetre, units) # Create 15 centimetres
+
+print(units.value_to_base(value)) # Convert the value to have the base unit of centimetres (metres)
+>>> <Value (0.15 <Unit (metre)>)>
+```
