@@ -54,12 +54,14 @@ class Value:
         value1 = self.__get_base_value(self)
         value2 = self.__get_base_value(other_value)
 
+        increasing_dimension = isinstance(other_value, Value)
+
         result_value = operator(value1, value2)
 
-        if operator == mul:
-            answer = Value(result_value, self.db.base_unit_from_value(self), self.db, dimension=(self.dimension + 1))
+        if operator == mul and increasing_dimension:
+            answer = Value(result_value / (self.unit.value ** (self.dimension + 1)), self.unit, self.db, dimension=(self.dimension + 1))
         else:
-            answer = Value(result_value, self.db.base_unit_from_value(self), self.db)
+            answer = Value(result_value / self.unit.value, self.db.base_unit_from_value(self), self.db)
             
         answer = self.db.unit_convert(answer, self.unit)
 
