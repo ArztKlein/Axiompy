@@ -11,9 +11,9 @@ class Unit:
         return f"<Unit ({self.name})>"
 
     def __mul__(self, other):
-        if(isinstance(other, (int, float, complex))):
+        if isinstance(other, (int, float, complex)):
             return axiompy.Value(other, self, self.db)
-        elif(isinstance(other, axiompy.value.Value)):
+        elif isinstance(other, axiompy.value.Value):
             return axiompy.Value(self.value * other.value, self, self.db)
 
     __rmul__ = __mul__

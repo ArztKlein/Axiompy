@@ -3,10 +3,10 @@ from operator import *
 
 class Value:
     
-    def __init__(self, value, unit: axiompy.unit.Unit, db: axiompy.Units,dimension=1):
+    def __init__(self, value, unit: axiompy.unit.Unit, db: axiompy.Units, dimension=1):
         self.value = value
         self.unit = unit
-        self.dimension=dimension
+        self.dimension = dimension
         self.db = db
 
     def __str__(self):
@@ -56,7 +56,7 @@ class Value:
 
         result_value = operator(value1, value2)
 
-        if(operator == mul):
+        if operator == mul:
             answer = Value(result_value, self.db.base_unit_from_value(self), self.db, dimension=(self.dimension + 1))
         else:
             answer = Value(result_value, self.db.base_unit_from_value(self), self.db)
