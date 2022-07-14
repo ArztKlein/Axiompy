@@ -62,8 +62,8 @@ class Units:
         Converts a value's unit to its base unit
         ie 15cm converts to 0.15m as metre is the base unit for length.
 
-        >>> value_to_base(Value(15, AxiomPy.centimetre))
-        Value(0.15, AxiomPy.metre)
+        >>> value_to_base(Value(15, units.centimetre))
+        Value(0.15, units.metre)
         """
 
         base_unit = self.base_unit_from_value(value)
