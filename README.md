@@ -25,7 +25,7 @@ print(units.unit_convert(3 * units.metre, units.foot))
 
 ## Get Unit from String
 
-If you wanted to get the unit from a string instead of using the __attr__, you can use Unit.unit()
+If you wanted to get the unit from a string instead of using the `__attr__`, you can use Unit.unit()
 
 ```python
 from axiompy import Units
