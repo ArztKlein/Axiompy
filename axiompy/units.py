@@ -25,7 +25,7 @@ class Units:
 
         for category in d["sections"].keys():
             for unit in d["sections"][category].keys():
-                if(unit == "base_unit"):
+                if unit == "base_unit":
                     units["base_units"][category] = d["sections"][category]["base_unit"]
                 else:
                     value = d["sections"][category][unit]
@@ -46,7 +46,7 @@ class Units:
         to_unit_value = to_unit.value
         
         # Make sure that units from different categories aren't being converted (eg hours to metres)
-        if(from_unit.category != to_unit.category):
+        if from_unit.category != to_unit.category:
             raise Exception(f"Incompatible unit categories {from_unit.category}, {to_unit.category}")
 
         return axiompy.Value((from_value.value * from_unit.value) / to_unit_value, to_unit, self, dimension=from_value.dimension)
