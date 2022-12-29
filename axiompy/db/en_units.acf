@@ -21,6 +21,10 @@ nautical_mile = cable * 10
 link = inch * 7.92
 rod = link * 25
 
+meter = metre * 1
+centimeter = centimetre * 1
+kilometer = kilometre * 1
+
 @time
 base_unit = second
 
