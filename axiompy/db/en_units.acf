@@ -1,5 +1,5 @@
 @length
-base_unit = metre
+base_unit = "metre"
 
 metre = 1
 centimetre = metre / 100
@@ -26,7 +26,7 @@ centimeter = centimetre * 1
 kilometer = kilometre * 1
 
 @time
-base_unit = second
+base_unit = "second"
 
 second = 1
 svedberg = 10^-13
@@ -43,7 +43,7 @@ century = year * 100
 galactic_year = 10 ^ 8 * 2.3 * year
 
 @mass
-base_unit = kilogram
+base_unit = "kilogram"
 
 kilogram = 1
 pound = kilogram * 0.45359237
