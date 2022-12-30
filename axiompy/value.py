@@ -61,8 +61,8 @@ class Value:
         if operator == mul and increasing_dimension:
             answer = Value(result_value / (self.unit.value ** (self.dimension + 1)), self.unit, self.db, dimension=(self.dimension + 1))
         else:
-            answer = Value(result_value / self.unit.value, self.db.base_unit_from_value(self), self.db)
-            
+            answer = Value(result_value, self.db.base_unit_from_value(self), self.db)
+        
         answer = self.db.unit_convert(answer, self.unit)
 
         return answer
