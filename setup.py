@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(name='axiompy',
       version='0.2.1',
-      description='Unit Conversions and other math',
+      description='Perform operations and conversions on units and values.',
       author='ArztKlein',
       author_email='',
       url='https://github.com/ArztKlein/Axiompy',
