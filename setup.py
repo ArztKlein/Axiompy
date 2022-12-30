@@ -8,8 +8,11 @@ setup(name='axiompy',
       author_email='',
       url='https://github.com/ArztKlein/Axiompy',
       keywords=['python','unit conversion', 'units'],
-      setup_requires=['wheel'],
+      setup_requires=['wheel', 'acfile'],
       python_requires='>3.6.1',
       packages=find_packages(),
-      include_package_data=True
+      include_package_data=True,
+      install_requires=[
+            'acfile'
+      ]
 )

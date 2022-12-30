@@ -1,3 +1,4 @@
+import acfile
 import axiompy
 import pkg_resources
 
@@ -7,13 +8,10 @@ class Units:
         rsman = pkg_resources.ResourceManager()
 
         unit_file = rsman.resource_string('axiompy', 'db/en_units.acf').decode('utf-8')
-        lines = unit_file.splitlines()
 
-        lines = list(filter(None, lines)) #Remove empty lines
+        self.units_acf = acfile.read.read_string(unit_file, dict=True)
 
-        self.units_dict = axiompy.ACF(lines).data
-
-        self.units = self.acf_dict_to_units(self.units_dict)
+        self.units = self.acf_dict_to_units(self.units_acf)
 
     def acf_dict_to_units(self, d):
         """
@@ -23,13 +21,12 @@ class Units:
 
         units = {"base_units": {}}
 
-        for category in d["sections"].keys():
-            for unit in d["sections"][category].keys():
-                if unit == "base_unit":
-                    units["base_units"][category] = d["sections"][category]["base_unit"]
+        for category, items in self.units_acf.items():
+            for name, value in items.items():
+                if name == "base_unit":
+                    units["base_units"][category] = value
                 else:
-                    value = d["sections"][category][unit]
-                    units[unit] = axiompy.Unit(unit, value, category, self)
+                    units[name] = axiompy.Unit(name, value, category, self)
 
         return units
 

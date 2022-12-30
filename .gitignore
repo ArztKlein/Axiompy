@@ -4,3 +4,4 @@ manifest
 dist
 build
 axiompy.egg-info
+.venv
